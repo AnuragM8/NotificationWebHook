@@ -13,8 +13,7 @@ app = Flask(__name__)
 app.debug = True 
 @app.route("/api/notifications", methods=["POST"])
 def notifications():
-    data = request.json
-    logging.info(data)
+    
  
     # Handle validation tokens during subscription creation
     if "validationToken" in request.args:
@@ -23,6 +22,8 @@ def notifications():
         return token
  
     # Notifications from MS Graph come as a list under "value"
+    data = request.get_json(silent=True) or {}
+    logging.info(data)
     notifications = data.get("value", [])
     for notification in notifications:
         logging.info(f"Notification received: {notification}")
