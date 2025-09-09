@@ -46,7 +46,7 @@ def notifications():
             # logging.info(f"LLM answer: {answer}")
             # send_reply(chat_id, answer)
  
-    return jsonify({"status": "received"}), 203
+    return jsonify({"status": "received"}), 200
  
  
 if __name__ == "__main__":
