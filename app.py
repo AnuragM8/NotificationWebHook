@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import requests
 import json
 import logging
+import time
  
 # Configure logging
 logging.basicConfig(
@@ -13,12 +14,13 @@ app = Flask(__name__)
 app.debug = True 
 @app.route("/api/notifications", methods=["POST"])
 def notifications():
+    starttime=time.time()
     
  
     # Handle validation tokens during subscription creation
     if "validationToken" in request.args:
         token = request.args.get("validationToken")
-        logging.info(f"Validation token received: {token}")
+        logging.info(f"Validation token received: {token} {time.time()-starttime}")
         return token
  
     # Notifications from MS Graph come as a list under "value"
